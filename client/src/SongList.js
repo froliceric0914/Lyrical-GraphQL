@@ -2,9 +2,6 @@ import React, { Component} from 'react';
 import gql from 'graphql-tag' //data query helper
 import { graphql } from 'react-apollo' //the helper to bond the query to client side
 
-
-
-
 //data required is the song titles
 class SongList extends Component {
   renderSongs() {
