@@ -26,7 +26,6 @@ class SongList extends Component {
   }
 
   render() {
-    console.log("this.props", this.props);
     //gql will first send the request and then component will be re-rendered when the data comes back
     if (this.props.data.loading) { return <div>Loading...</div>}
     console.log(this.props)
