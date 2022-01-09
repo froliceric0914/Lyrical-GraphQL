@@ -22,8 +22,6 @@ class CreateLyric extends Component {
         },
       })
       .then(() => this.setState({ content: '' }));
-
-    console.log('hello world');
   }
 
   render() {
@@ -47,6 +45,7 @@ const mutation = gql`
     addLyricToSong(songId: $songId, content: $content) {
       id
       lyrics {
+        id
         content
       }
     }

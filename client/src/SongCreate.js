@@ -19,10 +19,12 @@ class SongCreate extends Component {
     this.props
       .mutate({
         //this is the configuration object pre-set by graphQL mutation
+        //refetch the query after mutate the variables
         variables: {
           title: this.state.title,
         },
-        refetchQueries: [{ query }], //refetch the query after mutate the variables
+
+        refetchQueries: [{ query }],
       })
       .then(() => hashHistory.push('/'));
   }

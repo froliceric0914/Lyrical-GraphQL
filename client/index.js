@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "./style/style.css"
+import './style/style.css';
 //apollo communicate with BE
-import ApolloClient from 'apollo-client'; 
+import ApolloClient from 'apollo-client';
 //apollo customized for react, which provides the data for client side
-import { ApolloProvider } from 'react-apollo'; 
+import { ApolloProvider } from 'react-apollo';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-import App from "./src/App"
+import App from './src/App';
 import SongList from './src/SongList';
 import SongCreate from './src/SongCreate';
 import SongDetail from './src/SongDetail';
 
-const client = new ApolloClient({}); //initiate empty store
+const client = new ApolloClient({
+  dataIdFromObject: (o) => o.id,
+}); //initiate empty store
 
 const Root = () => {
   return (
@@ -24,10 +26,8 @@ const Root = () => {
           <Route path="songs/:id" component={SongDetail} />
         </Route>
       </Router>
-    </ApolloProvider>)
+    </ApolloProvider>
+  );
 };
 
-ReactDOM.render(
-  <Root />,
-  document.querySelector('#root')
-);
+ReactDOM.render(<Root />, document.querySelector('#root'));
