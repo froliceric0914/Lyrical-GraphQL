@@ -12,6 +12,7 @@ import SongList from './src/SongList';
 import SongCreate from './src/SongCreate';
 import SongDetail from './src/SongDetail';
 
+//let react knows that the data in relation have been updated
 const client = new ApolloClient({
   dataIdFromObject: (o) => o.id,
 }); //initiate empty store

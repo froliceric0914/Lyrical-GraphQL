@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+/*
+keys feature:
+1. use mutation on form submit
+2. use the mutate method, which return to a promise
+3. making a mutation function and pass the variables
+*/
 class CreateLyric extends Component {
   constructor(props) {
     super(props);

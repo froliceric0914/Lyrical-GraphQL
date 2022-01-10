@@ -6,11 +6,17 @@ import fetchSong from '../queries/fetchSong';
 
 import LyricList from './LyricList';
 import CreateLyric from './CreateLyric';
+
+/*
+keys usage at this page:
+1. use graphql to grasp the prama from the url path
+
+*/
 class SongDetail extends Component {
   render() {
     console.log('song details data', this.props.data);
     const { song } = this.props.data;
-    console.log('song', song);
+
     if (!song) {
       return <div>Loading...</div>;
     }

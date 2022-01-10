@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo'; //the helper to bond the query to client side
 import { Link } from 'react-router';
 import gql from 'graphql-tag';
-import query from '../queries/fetchSongs';
+import songQuery from '../queries/fetchSongs';
+/*
+key features:
+1. graphql as a glue to bond the data defined/formed from BE to FE
+2. use double HOF: 
+  2.1 mutation
+  2.2 IIF the graphql query
+3. refresh the data after calling mutation
 
+*/
 //data required is the song titles
 class SongList extends Component {
   //we are not using the refetchQueries: [ { query } ] here
@@ -37,10 +45,11 @@ class SongList extends Component {
     if (this.props.data.loading) {
       return <div>Loading...</div>;
     }
-    console.log(this.props);
+
     return (
       <div>
         <ul className="collection">{this.renderSongs()}</ul>
+
         <Link to="/songs/new" className="btn-floating btn-large red right">
           <i className="material-icons">add</i>
         </Link>
@@ -59,4 +68,4 @@ const mutation = gql`
 `;
 
 //graphql as a glue to bond the data defined/formed from be to fe
-export default graphql(mutation)(graphql(query)(SongList));
+export default graphql(mutation)(graphql(songQuery)(SongList));

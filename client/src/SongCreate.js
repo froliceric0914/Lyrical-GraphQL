@@ -3,8 +3,14 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, hashHistory } from 'react-router';
 
-import query from '../queries/fetchSongs';
+import songQuery from '../queries/fetchSongs';
 
+/*
+1. use mutation to create new data
+2. refetch the data in the promise chain
+3. cold/warm cache
+
+*/
 class SongCreate extends Component {
   constructor(props) {
     super(props);
@@ -23,8 +29,7 @@ class SongCreate extends Component {
         variables: {
           title: this.state.title,
         },
-
-        refetchQueries: [{ query }],
+        refetchQueries: [{ query: songQuery }], //the value pass in
       })
       .then(() => hashHistory.push('/'));
   }
