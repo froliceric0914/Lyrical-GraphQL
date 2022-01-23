@@ -3,12 +3,40 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 class LyricList extends Component {
-  onLike(songId) {
-    this.props.mutate({ variables: { songId } });
+  onLike(id) {
+    this.props.mutate({
+      variables: { id },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        /*
+        set the expected res, which is like a Guess, to improve the UI upadte time
+        this should be identical to the mutation name and its result, 
+        but dynamically update the params
+        */
+        likeLyrics: {
+          id,
+          likes: likes + 1,
+          __typename: 'LyricType',
+        },
+      },
+    });
   }
 
   renderLyrics() {
     return this.props.lyrics.map(({ id, content, likes }) => (
+      /* {id, content, likes} is destrucured from the inside fetchSong object:
+      query SongQuery($id: ID!) {
+        song(id: $id) {
+          id
+          title
+          lyrics {
+            id
+            content
+            likes
+          }
+        }
+      }
+      */
       <li className="collection-item" key={id}>
         {content}
         <div className="vote-box>">
@@ -27,8 +55,8 @@ class LyricList extends Component {
 }
 
 const mutation = gql`
-  mutation LikeLyrics($songId: ID!) {
-    likeLyric(id: $songId) {
+  mutation LikeLyrics($id: ID!) {
+    likeLyric(id: $id) {
       id
       likes
     }

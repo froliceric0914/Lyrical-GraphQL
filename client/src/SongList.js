@@ -24,22 +24,6 @@ class SongList extends Component {
       .then(() => this.props.data.refetch());
   }
 
-  renderSongs() {
-    return this.props.data.songs.map((song) => {
-      return (
-        <li key={song.id} className="collection-item">
-          <Link to={`songs/${song.id}`}>{song.title}</Link>
-          <i
-            className="material-icons"
-            onClick={() => this.onSongDelete(song.id)}
-          >
-            delete
-          </i>
-        </li>
-      );
-    });
-  }
-
   render() {
     //gql will first send the request and then component will be re-rendered when the data comes back
     if (this.props.data.loading) {
@@ -48,8 +32,19 @@ class SongList extends Component {
 
     return (
       <div>
-        <ul className="collection">{this.renderSongs()}</ul>
-
+        <ul className="collection">
+          {this.props.data.songs.map((song) => (
+            <li key={song.id} className="collection-item">
+              <Link to={`songs/${song.id}`}>{song.title}</Link>
+              <i
+                className="material-icons"
+                onClick={() => this.onSongDelete(song.id)}
+              >
+                delete
+              </i>
+            </li>
+          ))}
+        </ul>
         <Link to="/songs/new" className="btn-floating btn-large red right">
           <i className="material-icons">add</i>
         </Link>

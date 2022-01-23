@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import adddLyricToSongMution from '../mutations/addLyricToSong';
 
 /*
 keys feature:
@@ -31,7 +31,6 @@ class CreateLyric extends Component {
   }
 
   render() {
-    console.log('this.props: ', this.props);
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
         <div>{this.props.content}</div>
@@ -46,16 +45,17 @@ class CreateLyric extends Component {
   }
 }
 
-const mutation = gql`
-  mutation AddLyricToSong($songId: ID!, $content: String) {
-    addLyricToSong(songId: $songId, content: $content) {
-      id
-      lyrics {
-        id
-        content
-      }
-    }
-  }
-`;
+// const mutation = gql`
+//   mutation AddLyricToSong($songId: ID!, $content: String) {
+//     addLyricToSong(songId: $songId, content: $content) {
+//       id
+//       lyrics {
+//         id
+//         content
+//         likes
+//       }
+//     }
+//   }
+// `;
 
-export default graphql(mutation)(CreateLyric);
+export default graphql(adddLyricToSongMution)(CreateLyric);
